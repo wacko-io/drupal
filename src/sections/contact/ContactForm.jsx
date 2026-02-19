@@ -15,11 +15,14 @@ export function ContactForm({ submitLabelKey = 'contact.form.submit' }) {
     const { t } = useTranslation()
 
     const values = useSelector((s) => s.contactForm.values)
+    const auth = useSelector((s) => s.contactForm.auth)
     const errors = useSelector((s) => s.contactForm.errors)
     const status = useSelector((s) => s.contactForm.status)
+    const successMessageKey = useSelector((s) => s.contactForm.successMessageKey)
     const submitErrorMessageKey = useSelector((s) => s.contactForm.submitErrorMessageKey)
 
     const isLoading = status === 'loading'
+    const hasProfileAccess = Boolean(auth.formId && auth.login && auth.password && auth.profileUrl)
 
     const onChangeField = useCallback(
         (field) => (e) => {
@@ -108,7 +111,23 @@ export function ContactForm({ submitLabelKey = 'contact.form.submit' }) {
                 {isLoading ? t('contact.form.sending') : t(submitLabelKey)}
             </button>
 
-            {status === 'success' && <p className="contact__success">{t('contact.form.success')}</p>}
+            {status === 'success' && (
+                <p className="contact__success">{t(successMessageKey || 'contact.form.successCreated')}</p>
+            )}
+            {hasProfileAccess && (
+                <div className="contact__success">
+                    <p>{t('contact.form.editMode')}</p>
+                    <p>
+                        {t('contact.form.profileUrl')}: <a href={auth.profileUrl}>{auth.profileUrl}</a>
+                    </p>
+                    <p>
+                        {t('contact.form.login')}: <strong>{auth.login}</strong>
+                    </p>
+                    <p>
+                        {t('contact.form.password')}: <strong>{auth.password}</strong>
+                    </p>
+                </div>
+            )}
             {status === 'error' && (
                 <p className="contact__error">{t(submitErrorMessageKey || 'contact.form.errors.submitFailed')}</p>
             )}
