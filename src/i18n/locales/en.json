@@ -220,12 +220,19 @@
       "submit": "Leave a request!",
       "sending": "Sending…",
       "success": "Request sent",
+      "successCreated": "Request sent. User profile created for editing",
+      "successUpdated": "Previously submitted data has been updated",
+      "profileUrl": "Profile URL",
+      "login": "Login",
+      "password": "Password",
+      "editMode": "You are authorized. Re-submitting updates previously entered data.",
       "consent": "By sending a request, I consent to the processing of my personal data",
       "errors": {
         "nameRequired": "Please enter your name",
         "phoneInvalid": "Please enter a valid phone number",
         "emailInvalid": "Please enter a valid e-mail",
         "consentRequired": "Consent is required",
+        "authFailed": "Authorization failed. Check your login and password.",
         "submitFailed": "Submission failed. Please try again."
       }
     },
