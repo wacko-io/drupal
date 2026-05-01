@@ -31,6 +31,8 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          VITE_BACKEND_URL: https://drupal-api.starboxly.ru
         run: npm run build
 
       - name: Upload artifact
